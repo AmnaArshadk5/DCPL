@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>DCPL — Decentralized Collateralized P2P Loan</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.9.0/dist/web3.min.js"></script>
+</head>
+<body>
+  <!-- decorative blobs & header -->
+  <div class="bg-blobs" aria-hidden="true">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">🏦</div>
+      <div>
+        <h1>DCPL</h1>
+        <p class="subtitle">Decentralized Collateralized P2P Loans — lend ✨ borrow ⚖️</p>
+      </div>
+    </div>
+
+    <div class="account-area">
+      <div class="acct-label">Connected Account:</div>
+      <div id="accountDisplay" class="acct-value">N/A</div>
+      <button id="connectButton" class="btn btn-connect">🔗 Connect MetaMask</button>
+    </div>
+  </header>
+
+  <main class="content">
+    <div id="messageDisplay" class="msg info">Welcome! Connect your wallet to interact.</div>
+
+    <section class="grid">
+      <!-- Borrower card -->
+      <article class="card">
+        <h2>Borrower: Request Loan 💸</h2>
+
+        <label>Loan Principal (ETH) <span class="hint">— amount you want</span></label>
+        <input id="principalInput" type="number" value="1" step="0.1" />
+
+        <label>Collateral (ETH) <span class="hint">— must be &gt; principal</span></label>
+        <input id="collateralInput" type="number" value="1.1" step="0.1" />
+
+        <label>Interest Rate (%)</label>
+        <input id="interestRateInput" type="number" value="10" min="1" max="100" />
+
+        <div class="row">
+          <button id="requestButton" class="btn btn-primary" disabled>📝 Request & Lock</button>
+          <button id="refreshButtonTop" class="btn btn-muted" disabled>🔄 Refresh</button>
+        </div>
+        <p class="small">Tip: use small amounts while testing on Ganache.</p>
+      </article>
+
+      <!-- Lender card -->
+      <article class="card">
+        <h2>Lender / Claimer ⚖️</h2>
+
+        <label>Loan ID</label>
+        <input id="loanIdLender" type="number" placeholder="Enter loan id" />
+
+        <div class="row">
+          <button id="fundButton" class="btn btn-success" disabled>💰 Fund Loan</button>
+          <button id="claimButton" class="btn btn-danger" disabled>🧾 Claim Collateral</button>
+        </div>
+
+        <hr class="thin" />
+
+        <h3>Borrower: Repay</h3>
+        <label>Loan ID</label>
+        <input id="loanIdRepay" type="number" placeholder="Enter loan id" />
+        <div class="row">
+          <button id="repayButton" class="btn btn-info" disabled>✅ Repay Loan</button>
+        </div>
+      </article>
+
+      <!-- Loans board -->
+      <article class="card big">
+        <div class="board-top">
+          <h2>Active Loans Board 📋</h2>
+          <button id="refreshButton" class="btn btn-muted" disabled>🔁 Refresh Loans</button>
+        </div>
+
+        <div id="loansList" class="loans-list">
+          <div class="empty">No loans loaded yet. Connect wallet and click Refresh.</div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>DCPL</div>
+    <div class="small muted">Ensure you run via http (Live Server / localhost) so MetaMask is available.</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
